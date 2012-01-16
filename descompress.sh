@@ -59,27 +59,26 @@ then
   exit
 else
   # Check with file and grep by trial and error the file type
-  vacia=""
-  tipo=$(file -i $1 | grep /zip)
-  if [ $tipo != $vacia ]
+  tipo=$(file -i $1 | grep zip:)
+  if [ ${#tipo} != 0 ]
   then
     unzip $1
   fi
-  tipo=$(file -i $1 | grep tar)
-  if [ $tipo != $vacia ]
+  tipo=$(file -i $1 | grep tar:)
+  if [ ${#tipo} != 0 ]
   then
     tar -xvf $1
   fi
-  tipo=$(file -i $1 | grep gzip)
-  if [ $tipo != $vacia ]
+  tipo=$(file -i $1 | grep gz:)
+  if [ ${#tipo} != 0 ]
   then
-    tipo=$(file -i $1 | grep .tar.gz)
-    if [ $tipo != $vacia ]
+    tipo=$(file -i $1 | grep .tar.gz:)
+    if [ ${#tipo} != 0 ]
     then
       tar -xzvf $1
     else
-      tipo=$(file -i $1 | grep .tgz)
-      if [ $tipo != $vacia ]
+      tipo=$(file -i $1 | grep .tgz:)
+      if [ ${#tipo} != 0 ]
       then
         tar -xzvf $1
       else
@@ -87,24 +86,24 @@ else
       fi
     fi
   fi
-  tipo=$(file -i $1 | grep bzip2)
-  if [ $tipo != $vacia ]
+  tipo=$(file -i $1 | grep bz2)
+  if [ ${#tipo} != 0 ]
   then
-    tipo=$(file -i $1 | grep .tar.bz2)
-    if [ $tipo != $vacia ]
+    tipo=$(file -i $1 | grep .tar.bz2:)
+    if [ ${#tipo} != 0 ]
     then
       bzip2 -dc $1 | tar -xv
     else
       bzip2 -d $1
     fi
   fi
-  tipo=$(file -i $1 | grep x-lzh)
-  if [ $tipo != $vacia ]
+  tipo=$(file -i $1 | grep .lzma)
+  if [ ${#tipo} != 0 ]
   then
     lha -x $1
   fi
-  tipo=$(file -i $1 | grep x-rar)
-  if [ $tipo != $vacia ]
+  tipo=$(file -i $1 | grep .rar)
+  if [ ${#tipo} != 0 ]
   then
     rar -x $1
   fi
