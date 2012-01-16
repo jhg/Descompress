@@ -18,7 +18,7 @@
 ##                                                                          ##
 ##############################################################################
 
-.silent:
+.SILENT:
 
 all:
 	echo "Use make install as root for install descompress"
@@ -26,3 +26,6 @@ all:
 install:
 	cp ./descompress.sh /bin/descompress.sh
 	ln --symbolic /bin/descompress.sh /bin/descompress
+	chmod 755 /bin/descompress
+	chmod 755 /bin/descompress.sh
+
